@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,38 +8,194 @@
     <title>Gallery</title>
 
     <!-- CSS only -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" 
-            integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-</head>
-<body class = "m-5">
-    <div class="container">
-        <div class = "row">
-            <div class = "col-md-3">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 
+    <style>
+        .image-thumbail {
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .list-group-item a {
+            text-decoration: none;
+            color: black;
+        }
+    </style>
+</head>
+
+<body class="m-5">
+    <!--header start-->
+  <!-- <header class="p-3 bg-dark text-white">
+    <div class="container">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <div class="logo">
+          <a href="{% url 'gallery' %}" class="d-flex align-items-center mb-2 mb-lg-0  text-decoration-none">
+            Lens Queen
+          </a>
+        </div>
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+          <li><a href="{% url 'gallery' %}" class="nav-link px-2 ">Home</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              Catagory
+            </a>
+            <ul class="dropdown-menu drop-btn bg-dark" aria-labelledby="navbarDropdownMenuLink">
+              <li><a class="dropdown-item" href="{% url 'gallery' %}">All</a></li>
+              {% for category in categories %}
+              <li><a class="dropdown-item" href="{% url 'gallery' %}?category={{category.name}}">{{category.name}}</a>
+              </li>
+              {% endfor %}
+            </ul>
+          </li>
+          <li><a href="{% url 'add' %}" class="nav-link px-2 ">Add Photo</a></li>
+        </ul>
+
+        <form class="d-flex">
+          <input class="form-control me-2" name="q" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-light" type="submit">Search</button>
+        </form>
+        <div class="text-end">
+          <div class="log_sign">
+            <button type="button" class="btn btn-outline-light me-2 sign_in"><a href="{% url 'logout' %}">Log
+                Out</a></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header> -->
+  <!--header end-->
+  <!-- <nav class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Navbar</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'gallery' %}">Home</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              Catagory
+            </a>
+            <ul class="dropdown-menu drop-btn bg-dark" aria-labelledby="navbarDropdownMenuLink">
+              <li><a class="dropdown-item" href="{% url 'gallery' %}">All</a></li>
+              {% for category in categories %}
+              <li><a class="dropdown-item" href="{% url 'gallery' %}?category={{category.name}}">{{category.name}}</a>
+              </li>
+              {% endfor %}
+            </ul>
+          </li>
+          <li><a href="{% url 'add' %}" class="nav-link px-2 ">Add Photo</a></li>
+          <li class="nav-item">
+            <a class="nav-link disabled">Disabled</a>
+          </li>
+        </ul>
+        
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav> -->
+  <!-- <div class="container my-4">
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="/static/images/1.jpg" class="d-block w-100" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+              <h5>Second slide</h5>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img src="/static/images/2.jpg" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="/static/images/3.jpg" class="d-block w-100" alt="...">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+  </div> -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                {% if request.user.is_authenticated %}
+                <h3>Lens Queen</h3>
+                <p>Hello {{request.user}}, welcome to the gallery!</p>
+                {% endif %}
                 <div class="card">
                     <div class="card-header">
-                      Categories
+                        Categories
                     </div>
                     <ul class="list-group list-group-flush">
-                      <li class="list-group-item">Family</li>
-                      <li class="list-group-item">Friends</li>
-                      <li class="list-group-item">Travel</li>
-                      <li class="list-group-item">Nature</li>
-                      <li class="list-group-item">Events/Programs</li>
-                      <li class="list-group-item">Campus</li>
-                      <li class="list-group-item">For Exhibition</li>
+                        <li class="list-group-item">
+                            <a href="{% url 'gallery' %}">All</a>
+                        </li>
+                        {% for category in categories %}
+                        <li class=" list-group-item">
+                            <a href="{% url 'gallery' %}?category={{category.name}}">
+                                {{category.name}}
+                            </a>
+                        </li>
+                        {% endfor %}
+
+
+                        <a href="{% url 'add' %}" class="btn btn-dark btn-block btn-sm m-1">Add Photo</a>
+                        <a href="{% url 'logout' %}" class="btn btn-dark btn-block btn-sm m-1">Logout</a>
+                        <form class="d-flex">
+                          <input class="form-control me-2" name="q" type="search" placeholder="Search" aria-label="Search">
+                          <button class="btn btn-dark btn-block btn-sm m-1" type="submit">Submit</button>
+                        </form>
                     </ul>
-                  </div>
+                </div>
 
             </div>
-            <div class = "col-md-9">
-                Gallery
+            <div class="col-md-9">
+                <div class="row">
 
+                    {% for photo in photos %}
+                    <div class="col-md-4">
+                        <div class="card my-2">
+                            <img class="image-thumbail" src="{{photo.image.url}}" alt="Card image cap">
+
+                            <div class="card-body">
+                                <small><b>Category:</b> {{photo.category.name}}</small>
+                                <p></p>
+                                <small><b>Photo Title:</b> {{photo.photo_title}}</small>
+                            </div>
+                            <a href="{% url 'photo' photo.id %}" class="btn btn-outline-dark btn-sm m-1">View Full Image</a>
+                            <!-- <a href="{% url 'delete-item' photo.id %}" class="btn btn-outline-dark btn-sm m-1"><i class="fa-solid fa-user-pen"></i>Edit Image</a> -->
+                            <a href="{% url 'delete-item' photo.id %}" class="btn btn-sm btn-danger">Delete Image</a>
+
+                        </div>
+                    </div>
+                    {% empty %}
+                    <h3>No photos...</h3>
+                    {% endfor %}
+
+                </div>
             </div>
-
         </div>
-
     </div>
-    
+
 </body>
+
 </html>

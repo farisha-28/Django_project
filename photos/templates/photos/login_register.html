@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login/Register</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+    <style>
+        .login--wrapper{
+            display : flex;
+            height  : 80vh;
+            align-items : center;
+            justify-content: center;
+        }
+
+        .form{
+            width : 700px;
+        }
+        .login--wrapper {
+            display: flex;
+            height: 80vh;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .form {
+            width: 700px;
+        }
+        .login_register {
+            background: url("/static/images/purple.jpg")no-repeat;
+            background-size: cover;
+            height: 380px;
+            background-position: 50% 50%;
+            width: 100%;
+        }
+        
+        .login_register h1 {
+            font-size: 4rem;
+            font-weight: 700;
+        }
+    </style>
+
+</head>
+
+<body>
+    
+<section class="login_register ">
+    <div class="container py-5 ">
+        <div class="row py-5 ">
+            <div class="col-lg-14 pt-5 text-center ">
+                <h1 class="pt-5 "> </h1>
+                <h3 style="color: rgb(244, 235, 242)">A Photograph Keeps a Moment from Running Away.</h3>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <div class="container">
+        <div class="login--wrapper">
+            {% if page == 'login' %}
+
+        <form method = 'post' class = "form">
+            {% csrf_token %}
+            <h1>Login</h1>
+            <h5>Login to view photos and share with your friends</h5>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Username</label>
+          <input type="text" class="form-control" name ="username" id="exampleInputEmail1" aria-describedby="emailHelp">
+          
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Password</label>
+          <input type="password" class="form-control" name="password" id="exampleInputPassword1">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <p></p>
+        <p>Yet Not Registered? <a href= "{% url 'register' %}"><h4>Register</h4></a> </p>
+      </form>
+
+       {% else %}
+       <form method = 'post'>
+
+        {% csrf_token %}
+        <h1>Register</h1>
+        <!-- {{form}} -->
+        {% for field in form %}
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">{{field.label}}</label>
+            {{field}}
+          </div>
+        {% endfor %}
+        <p>Enter the same password as before, for verification</p>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <p></p>
+        <p>Already have an account? <a href= "{% url 'login' %}"><h4>Login</h4></a> </p>
+
+       </form>
+
+      {% endif %}
+        </div>
+    </div>
+</body>
+</html>
+
